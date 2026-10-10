@@ -42,6 +42,7 @@ filmcraft-project = { path = "crates/project" }
 filmcraft-edit = { path = "crates/edit" }
 filmcraft-interchange = { path = "crates/interchange" }
 filmcraft-text = { path = "crates/text" }
+filmcraft-svg = { path = "crates/svg" }
 filmcraft-captions = { path = "crates/captions" }
 filmcraft-speech = { path = "crates/speech" }
 filmcraft-render = { path = "crates/render" }

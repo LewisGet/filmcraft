@@ -252,3 +252,10 @@ panel state and the Type-tool selection.
 
 Mask-with-text, gradient fills, per-layer blend modes, Bézier curves in the pen tool (paths are
 polygons), media layers inside graphics, and template controls grouped into folders.
+
+
+## Legacy Title (SVG)
+
+FilmCraft's SVG still-image support is implemented through `filmcraft-svg`, a bounded SVG 1.1 Second Edition subset parser/serializer/rasterizer. SVG files are treated as still images at their declared canvas dimensions and are rasterized by the existing `filmcraft-text` path and mask primitives. The parser refuses oversized input/canvases and reports unsupported elements as warnings; external image/use references are not loaded.
+
+The current implementation supports basic rectangles, circles/ellipses, lines, polylines, polygons, and a limited path command set (`M`, `L`, `H`, `V`, `Q`, `C`, `Z`, absolute and relative). Transform support, arc/smooth path commands, broader CSS/color syntax, and the Legacy Title editor/commands are not yet implemented.

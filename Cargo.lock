@@ -2048,6 +2048,7 @@ version = "0.2.1"
 dependencies = [
  "filmcraft-color",
  "filmcraft-frame",
+ "filmcraft-svg",
  "filmcraft-time",
  "image",
  "rayon",
@@ -2191,6 +2192,16 @@ name = "filmcraft-testkit"
 version = "0.2.1"
 dependencies = [
  "png",
+]
+
+[[package]]
+name = "filmcraft-svg"
+version = "0.2.1"
+dependencies = [
+ "filmcraft-text",
+ "roxmltree",
+ "serde",
+ "thiserror 2.0.21",
 ]
 
 [[package]]

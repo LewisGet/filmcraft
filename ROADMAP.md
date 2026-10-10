@@ -206,3 +206,11 @@ Status: ✅ done · 🟡 in progress · ⬜ not started. Estimates are remaining
 ### Interface localization
 
 Edit > Language switches English/Japanese/Spanish/Portuguese (Brazilian) and persists in UI state. Commands `app.language.english`, `app.language.japanese`, `app.language.spanish` and `app.language.portuguese` are reachable through the control channel. Core native/in-window menu labels are translated; untranslated labels use English. Japanese text uses the Japanese fonts from [craft-fonts](https://github.com/storytold/craft-fonts) when FilmCraft is built with them (`CRAFT_FONTS_DIR`; all official releases, including the web build), otherwise a Japanese font already installed on the system; with neither, switching to Japanese is refused with a message. Dialog/panel translation coverage remains open. Existing vertical text support is preserved.
+
+
+## Legacy Title / SVG
+
+- [x] Add the `filmcraft-svg` L1 crate with bounded SVG parsing, serialization, warnings, and CPU rasterization foundations.
+- [x] Import `.svg` as a still-image media source.
+- [ ] Complete SVG 1.1 subset coverage (transforms, smooth/arc path commands, color/style properties) and hostile-input mutation tests.
+- [ ] Add the Legacy Title editor, `graphics.legacyTitle.open` / `graphics.legacyTitle.save`, sequence creation, undo integration, and double-click timeline editing.

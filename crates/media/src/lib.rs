@@ -137,7 +137,7 @@ pub trait MediaSource: Send + Sync {
 pub type SharedSource = Arc<dyn MediaSource>;
 
 /// File extensions we recognise at import (the media browser filters on these).
-pub const STILL_EXTENSIONS: &[&str] = &["png", "jpg", "jpeg", "gif", "webp", "tif", "tiff", "bmp"];
+pub const STILL_EXTENSIONS: &[&str] = &["png", "jpg", "jpeg", "gif", "webp", "tif", "tiff", "bmp", "svg"];
 pub const AUDIO_EXTENSIONS: &[&str] = &["wav", "wave", "bwf", "aif", "aiff", "mp3", "mp2", "m4a", "aac", "flac", "ogg", "opus"];
 pub const VIDEO_EXTENSIONS: &[&str] = &[
     "mp4", "m4v", "mov", "mkv", "webm", "avi", "mxf", "mts", "m2ts", "m2t", "ts", "mpg", "mpeg", "vob", "mod", "tod", "m2v", "m1v", "mpv", "3gp", "y4m", "apv",
@@ -161,7 +161,7 @@ pub fn open_bytes(name: &str, bytes: Arc<[u8]>, extra: &[Opener]) -> Result<Shar
     if wav::sniff(&bytes) {
         return Ok(Arc::new(wav::WavSource::parse(name, bytes)?));
     }
-    if still::sniff(&bytes) {
+    if still::is_svg(name) || still::sniff(&bytes) {
         return Ok(Arc::new(still::StillSource::decode(name, &bytes)?));
     }
     Err(MediaError::Unsupported(format!("{name}: unrecognised format")))
