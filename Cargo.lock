@@ -2048,7 +2048,6 @@ version = "0.2.1"
 dependencies = [
  "filmcraft-color",
  "filmcraft-frame",
- "filmcraft-svg",
  "filmcraft-time",
  "image",
  "rayon",
@@ -2245,6 +2244,7 @@ dependencies = [
  "filmcraft-project",
  "filmcraft-render",
  "filmcraft-scopes",
+ "filmcraft-svg",
  "filmcraft-text",
  "filmcraft-time",
  "image",

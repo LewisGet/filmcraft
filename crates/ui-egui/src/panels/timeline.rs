@@ -2052,6 +2052,30 @@ fn interact(app: &mut FilmcraftApp, ui: &mut egui::Ui, seq: &Sequence, layout: &
         }
     }
 
+    // ---- double-click a saved Legacy Title still: reopen its sibling SVG for editing.
+    if resp.double_clicked()
+        && tool == Tool::Selection
+        && let Some(p) = resp.interact_pointer_pos()
+        && let Hit::Clip { clip, .. } = hit(seq, layout, p)
+        && let Some((_, track_item)) = seq.find_item(clip)
+        && let Some((_, media, _)) = app.session.project.resolve_media(track_item.item)
+        && let filmcraft_project::MediaRef::File { path } = &media.media
+    {
+        // Own the path before issuing an engine command, which mutably borrows the session.
+        let media_path = path.clone();
+        let still_path = std::path::Path::new(&media_path);
+        if still_path.extension().is_some_and(|ext| ext.to_string_lossy().eq_ignore_ascii_case("png")) {
+            let svg_path = still_path.with_extension("svg");
+            if svg_path.is_file() {
+                let _ = app.session.execute("timeline.select", json!({"clips": [clip.0]}));
+                match super::svg_editor::open_existing(&ui.ctx().clone(), &svg_path.to_string_lossy()) {
+                    Ok(()) => app.ui.status = format!("Reopened Legacy Title: {}", svg_path.display()),
+                    Err(e) => app.ui.status = e,
+                }
+            }
+        }
+    }
+
     // ---- double-click a nested sequence clip: open it in its own Timeline tab
     if resp.double_clicked()
         && tool == Tool::Selection
